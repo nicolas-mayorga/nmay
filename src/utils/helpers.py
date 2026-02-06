@@ -11,7 +11,8 @@ def are_ports_valid(ports):
     for port in ports:
             if not is_port_valid(port):
                 raise ValueError(f"Port {port} is invalid.")
-    return 
+
+    return True
 
 # check if a range is valid (ex: user enters -9999999 9999999, check the range first to avoid building a huge list just for it to be invalid)
 def is_range_valid(start, end):
@@ -40,5 +41,8 @@ def get_ports(args):
 
     return sorted(ports_to_scan)
 
-def get_service(port):
-    return socket.getservbyport(port)
+def get_tcp_service(port):
+    try:
+        return socket.getservbyport(port, "tcp")
+    except (OSError, socket.error):
+        return "unknown"

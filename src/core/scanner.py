@@ -30,11 +30,11 @@ def run_tcp_scan(target, ports, timeout, banners):
     print("=" * 30)
         
     for port in open_ports:
-        try:
-            service = utils.helpers.get_service(port)
-        except OSError:
-            service = "unknown"
+
+        service = utils.helpers.get_tcp_service(port)
+        
         print(f"{str(port) + '/tcp':<10} {'open':<10} {service}")
+        
         if not open_ports.get(port) == "":
             print(open_ports.get(port))
             response = gemini.gemini_response(service, port, open_ports.get(port))
