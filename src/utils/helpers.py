@@ -1,4 +1,6 @@
 # contains helper functions 
+import json
+import socket 
 
 # check if a port contains valid integers (no alphabetic chars etc.)
 def is_port_valid(port: int):
@@ -37,3 +39,6 @@ def get_ports(args):
         ports_to_scan.update(args.ports)
 
     return sorted(ports_to_scan)
+
+def get_service(port):
+    return socket.getservbyport(port)

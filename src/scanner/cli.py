@@ -15,6 +15,7 @@ def main():
     parser.add_argument("-t", "--timeout", type=int, default=3, help="Timeout in seconds")
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose output")
     parser.add_argument("-o", "--output", type=str)
+    parser.add_argument("-b", "--banners", type=bool, default=False)
     parser.add_argument("-sS", "--syn-scan", action="store_true", help="Perform TCP SYN scan")
     parser.add_argument("-sU", "--udp-scan", action="store_true", help="Scan UDP ports")
     parser.add_argument("-sD", "--service-detect", action="store_true", help="Try to identify running services on open ports")
@@ -31,4 +32,4 @@ def main():
 
     print(f"Scanning {args.target}\nPort(s): {ports_to_scan}\nTimeout: {args.timeout}\nRate Limited: {args.rate_limit}")
 
-    run_tcp_scan(args.target, ports_to_scan, args.timeout)
+    run_tcp_scan(args.target, ports_to_scan, args.timeout, args.banners)
